@@ -1,0 +1,178 @@
+body {
+    font-family: 'Assistant', sans-serif;
+    color: #e2e8f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #1e293b, #334155, #0f172a, #475569);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    overflow-x: hidden; /* מונע גלילה אופקית מיותרת */
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- כפתורים ופקדים --- */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px 20px;
+    margin-top: 15px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.controls label {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+.controls button, .controls select {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-family: 'Assistant', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #334155;
+    color: #e2e8f0;
+    border: 1px solid #475569;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.controls button:hover, .controls select:hover {
+    background-color: #475569;
+    border-color: #64748b;
+}
+
+#start-btn.primary-btn {
+    background-color: #38bdf8;
+    color: #0f172a;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+#start-btn.primary-btn:hover {
+    background-color: #7dd3fc;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+#speed-slider { cursor: pointer; }
+
+/* --- עיצוב הרשת והתאים --- */
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(50, 25px);
+    border: 2px solid #475569;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border-radius: 5px;
+    background-color: #0f172a;
+}
+
+.grid-cell {
+    width: 25px;
+    height: 25px;
+    outline: 1px solid #334155;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* --- עיצוב סוגי התאים השונים --- */
+.start-node {
+    background-color: #4ade80;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.end-node {
+    background-color: #f87171;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z'/%3E%3C/svg%3E");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wall {
+    background-color: #94a3b8;
+    transform: scale(1.05);
+    border-radius: 3px;
+    animation: wall-pop 0.2s ease;
+}
+@keyframes wall-pop { from { transform: scale(0.5); } to { transform: scale(1.05); } }
+
+.visited {
+    background-color: rgba(139, 92, 246, 0.5);
+    animation: visited-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes visited-pop {
+    0% { transform: scale(0.3); border-radius: 100%; }
+    50% { background-color: rgba(167, 139, 250, 0.7); }
+    100% { transform: scale(1); border-radius: 0; }
+}
+
+.path {
+    background-color: #facc15;
+    animation: path-pulse 0.7s infinite alternate;
+}
+@keyframes path-pulse { from { transform: scale(0.8); background-color: #facc15; } to { transform: scale(1.1); background-color: #fbbf24; } }
+
+/* --- חלון ההוראות (Modal) --- */
+.modal-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background-color: #1e293b;
+    padding: 30px; border-radius: 10px; text-align: center;
+    width: 90%; max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #475569;
+}
+.modal-content h2 { margin-top: 0; }
+#close-modal-btn {
+    padding: 10px 20px; font-size: 1rem; cursor: pointer;
+    background-color: #38bdf8; color: #0f172a; border: none;
+    border-radius: 5px; margin-top: 20px; font-weight: 700;
+}

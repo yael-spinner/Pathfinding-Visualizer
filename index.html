@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ויזואליזציה של אלגוריתם חיפוש נתיבים</title>
+    <!-- קישור לגופן מגוגל -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
+    <!-- קישור לקובץ העיצוב -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- חלון הוראות קופץ -->
+    <div id="modal-container" class="modal-container">
+        <div class="modal-content">
+            <h2>ברוכים הבאים!</h2>
+            <p>גררו את העכבר על הרשת כדי לצייר או למחוק קירות.</p>
+            <p>ניתן גם לגרור את נקודות ההתחלה והסיום.</p>
+            <p>בחרו אלגוריתם ולחצו על הכפתור כדי להתחיל!</p>
+            <button id="close-modal-btn">הבנתי, בואו נתחיל!</button>
+        </div>
+    </div>
+
+    <header>
+        <h1>ויזואליזציה של חיפוש נתיבים</h1>
+        <div class="controls">
+            <!-- בחירת אלגוריתם -->
+            <div class="control-group">
+                <label for="algorithm-select">בחר אלגוריתם:</label>
+                <select id="algorithm-select">
+                    <option value="astar">A* (היעיל ביותר)</option>
+                    <option value="bfs">BFS (הקצר ביותר)</option>
+                    <option value="dijkstra">Dijkstra (בסיסי)</option>
+                </select>
+            </div>
+            
+            <!-- כפתור הפעלה ראשי -->
+            <button id="start-btn" class="primary-btn">הפעל ויזואליזציה!</button>
+
+            <!-- כפתורים נוספים -->
+            <div class="control-group">
+                 <button id="maze-btn">צור מבוך</button>
+                 <button id="clear-walls-btn">נקה קירות</button>
+                 <button id="clear-board-btn">נקה הכל</button>
+            </div>
+
+            <!-- בקרת מהירות -->
+            <div class="control-group">
+                <label for="speed-slider">מהירות:</label>
+                <input type="range" id="speed-slider" min="10" max="100" value="80">
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- כאן הרשת תיווצר על ידי JavaScript -->
+        <div id="grid-container"></div>
+    </main>
+    
+    <!-- קישור לקובץ הלוגיקה -->
+    <script src="script.js"></script>
+</body>
+</html>
