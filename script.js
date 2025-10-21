@@ -276,7 +276,6 @@ function heuristic(nodeA, nodeB) {
 }
 
 
-// ------ 4. אנימציה ושחזור נתיב (עם התיקונים) ------
 async function animateSearch(visitedNodesInOrder, endNode) {
     for (const cell of visitedNodesInOrder) {
         const isStart = cell.row === START_NODE_ROW && cell.col === START_NODE_COL;
@@ -313,7 +312,6 @@ async function animatePath(endNode) {
     }
 }
 
-// ------ 5. יצירת מבוך (Recursive Division) ------
 async function generateMaze() {
     if (isRunning) return;
     isRunning = true;
@@ -374,7 +372,6 @@ async function drawWall(cell) {
     await sleep(animationSpeed / 2);
 }
 
-// ------ פונקציות עזר ------
 function getNeighbors(cell) {
     const neighbors = [];
     const { row, col } = cell;
@@ -391,7 +388,6 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// ------ הרצה ראשונית וחיבור אירועים לכפתורים ------
 createGrid();
 startBtn.addEventListener('click', runVisualization);
 mazeBtn.addEventListener('click', generateMaze);
